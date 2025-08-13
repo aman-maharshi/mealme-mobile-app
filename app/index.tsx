@@ -1,7 +1,8 @@
+import CartButton from "@/components/CartButton"
 import { images, offers } from "@/constants"
 import cn from "clsx"
 import { Fragment } from "react"
-import { FlatList, Image, Pressable, SafeAreaView, Text, View } from "react-native"
+import { FlatList, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 
 export default function Index() {
   return (
@@ -35,6 +36,19 @@ export default function Index() {
         }}
         contentContainerClassName="px-5 pb-28"
         showsVerticalScrollIndicator={false}
+        ListHeaderComponent={() => (
+          <View className="flex-between flex-row w-full my-5">
+            <View className="flex-start">
+              <Text className="small-bold text-primary">DELIVER TO</Text>
+              <TouchableOpacity className="flex-center flex-row gap-x-1 mt-0.5">
+                <Text className="paragraph-bold text-dark-100">Croatia</Text>
+                <Image source={images.arrowDown} className="size-3" resizeMode="contain" />
+              </TouchableOpacity>
+            </View>
+
+            <CartButton />
+          </View>
+        )}
       />
     </SafeAreaView>
   )
