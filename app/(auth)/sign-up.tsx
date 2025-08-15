@@ -1,10 +1,18 @@
 import CustomButton from "@/components/CustomButton"
 import CustomInput from "@/components/CustomInput"
+import { useAuthStore } from "@/store/authStore"
 import { Link, router } from "expo-router"
 import React from "react"
 import { Text, View } from "react-native"
 
 const SignUp = () => {
+  const { signIn } = useAuthStore()
+
+  const handleSignUp = () => {
+    signIn()
+    router.replace("/")
+  }
+
   return (
     <View className="gap-10 bg-white rounded-lg p-5 mt-5">
       <CustomInput placeholder="Enter your full name" value={""} onChangeText={() => {}} label="Full name" />
@@ -23,7 +31,7 @@ const SignUp = () => {
         secureTextEntry={true}
       />
 
-      <CustomButton title="Sign Up" isLoading={false} onPress={() => router.replace("/")} />
+      <CustomButton title="Sign Up" isLoading={false} onPress={handleSignUp} />
 
       <View className="flex justify-center mt-5 flex-row gap-2">
         <Text className="base-regular text-gray-100">Already have an account?</Text>
