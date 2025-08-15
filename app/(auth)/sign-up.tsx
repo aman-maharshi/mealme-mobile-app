@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton"
 import CustomInput from "@/components/CustomInput"
-import { Link } from "expo-router"
+import { Link, router } from "expo-router"
 import React from "react"
 import { Text, View } from "react-native"
 
@@ -23,7 +23,7 @@ const SignUp = () => {
         secureTextEntry={true}
       />
 
-      <CustomButton title="Sign Up" isLoading={false} onPress={() => {}} />
+      <CustomButton title="Sign Up" isLoading={false} onPress={() => router.replace("/")} />
 
       <View className="flex justify-center mt-5 flex-row gap-2">
         <Text className="base-regular text-gray-100">Already have an account?</Text>
