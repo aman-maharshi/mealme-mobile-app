@@ -34,7 +34,7 @@ export default function Index() {
             </View>
           )
         }}
-        contentContainerClassName="px-5 pb-28"
+        contentContainerClassName="px-5 pb-32"
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
           <View className="flex-between flex-row w-full my-5">
