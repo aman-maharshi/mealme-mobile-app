@@ -1,12 +1,13 @@
+import { useCartStore } from "@/store/cartStore"
 import { MenuItem } from "@/type"
 import { useState } from "react"
 import { ActivityIndicator, Image, Platform, Text, TouchableOpacity, View } from "react-native"
 
-const MenuCard = ({ item: { $id, image_url, name, price } }: { item: MenuItem }) => {
+const MenuCard = ({ item }: { item: MenuItem }) => {
   const [imageLoading, setImageLoading] = useState(true)
   const [imageError, setImageError] = useState(false)
-
-  const addItem = () => {}
+  const { addItem, getItemQuantity } = useCartStore()
+  const itemQuantity = getItemQuantity(item.$id)
 
   return (
     <TouchableOpacity
@@ -28,7 +29,7 @@ const MenuCard = ({ item: { $id, image_url, name, price } }: { item: MenuItem })
         )}
 
         <Image
-          source={{ uri: image_url }}
+          source={{ uri: item.image_url }}
           className="size-32 absolute inset-0"
           resizeMode="contain"
           onLoadStart={() => setImageLoading(true)}
@@ -42,11 +43,13 @@ const MenuCard = ({ item: { $id, image_url, name, price } }: { item: MenuItem })
       </View>
 
       <Text className="text-center base-bold text-dark-100 mb-2" numberOfLines={1}>
-        {name}
+        {item.name}
       </Text>
-      <Text className="body-regular text-gray-200 mb-4">From ${price}</Text>
-      <TouchableOpacity onPress={addItem}>
-        <Text className="paragraph-bold text-primary">Add to Cart +</Text>
+      <Text className="body-regular text-gray-200 mb-4">From ${item.price}</Text>
+      <TouchableOpacity onPress={() => addItem(item)}>
+        <Text className="paragraph-bold text-primary">
+          {itemQuantity > 0 ? `In Cart (${itemQuantity})` : "Add to Cart +"}
+        </Text>
       </TouchableOpacity>
     </TouchableOpacity>
   )

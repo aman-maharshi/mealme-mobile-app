@@ -29,7 +29,7 @@ const Search = () => {
         keyExtractor={item => item.$id}
         numColumns={2}
         columnWrapperClassName="gap-7"
-        contentContainerClassName="gap-7 px-5 pb-32"
+        contentContainerClassName="gap-7 pb-32"
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
           <View className="my-5 gap-5">
