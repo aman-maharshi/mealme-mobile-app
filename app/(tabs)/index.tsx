@@ -1,7 +1,6 @@
 import CartButton from "@/components/CartButton"
 import { images, offers } from "@/constants"
 import cn from "clsx"
-import { router } from "expo-router"
 import { Fragment } from "react"
 import { FlatList, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 
@@ -41,11 +40,8 @@ export default function Index() {
           <View className="flex-between flex-row w-full my-5">
             <View className="flex-start">
               <Text className="small-bold text-primary">DELIVER TO</Text>
-              <TouchableOpacity
-                onPress={() => router.replace("/(tabs)/cart")}
-                className="flex-center flex-row gap-x-1 mt-0.5"
-              >
-                <Text className="paragraph-bold text-dark-100">New Delhi</Text>
+              <TouchableOpacity className="flex-center flex-row gap-x-1 mt-0.5">
+                <Text className="paragraph-bold text-dark-100">Croatia</Text>
                 <Image source={images.arrowDown} className="size-3" resizeMode="contain" />
               </TouchableOpacity>
             </View>
