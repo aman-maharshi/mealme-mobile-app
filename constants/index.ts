@@ -43,24 +43,29 @@ import tomatoes from "@/assets/images/tomatoes.png"
 
 export const CATEGORIES = [
   {
-    id: "1",
-    name: "All"
+    $id: "1",
+    name: "All",
+    description: "All menu items"
   },
   {
-    id: "2",
-    name: "Burger"
+    $id: "2",
+    name: "Burger",
+    description: "Juicy grilled burgers"
   },
   {
-    id: "3",
-    name: "Pizza"
+    $id: "3",
+    name: "Pizza",
+    description: "Oven-baked cheesy pizzas"
   },
   {
-    id: "4",
-    name: "Wrap"
+    $id: "4",
+    name: "Wrap",
+    description: "Rolled up wraps packed with flavor"
   },
   {
-    id: "5",
-    name: "Burrito"
+    $id: "5",
+    name: "Burrito",
+    description: "Rolled Mexican delights"
   }
 ]
 
