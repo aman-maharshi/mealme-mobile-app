@@ -1,12 +1,13 @@
 import { Category } from "@/type"
 import cn from "clsx"
 import { router, useLocalSearchParams } from "expo-router"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { FlatList, Platform, Text, TouchableOpacity } from "react-native"
 
 const Filter = ({ categories }: { categories: Category[] }) => {
   const searchParams = useLocalSearchParams()
   const [active, setActive] = useState(searchParams.category || "All")
+  const flatListRef = useRef<FlatList>(null)
 
   // Sync local state with URL params
   useEffect(() => {
@@ -16,6 +17,23 @@ const Filter = ({ categories }: { categories: Category[] }) => {
       setActive("All")
     }
   }, [searchParams.category])
+
+  // Scroll to active item when it changes
+  useEffect(() => {
+    if (flatListRef.current && active) {
+      const activeIndex = filterData.findIndex(item => item.name === active)
+      if (activeIndex !== -1) {
+        // Add a small delay to ensure the component has rendered
+        setTimeout(() => {
+          flatListRef.current?.scrollToIndex({
+            index: activeIndex,
+            animated: true,
+            viewPosition: 0.5 // Center the item in the visible area
+          })
+        }, 100)
+      }
+    }
+  }, [active])
 
   const handlePress = (name: string) => {
     setActive(name)
@@ -31,6 +49,7 @@ const Filter = ({ categories }: { categories: Category[] }) => {
 
   return (
     <FlatList
+      ref={flatListRef}
       data={filterData}
       keyExtractor={item => item.name}
       horizontal

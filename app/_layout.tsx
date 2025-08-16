@@ -2,6 +2,7 @@ import { useFonts } from "expo-font"
 import { Slot, SplashScreen } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { useEffect } from "react"
+import { View } from "react-native"
 import "./globals.css"
 
 export default function RootLayout() {
@@ -20,7 +21,8 @@ export default function RootLayout() {
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="white" />
+      <StatusBar style="dark" />
+      <View className="absolute top-0 left-0 right-0 h-12 bg-white z-50" />
       <Slot />
     </>
   )
