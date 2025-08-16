@@ -5,18 +5,30 @@ import Searchbar from "@/components/SearchBar"
 import dummyData from "@/constants/data"
 import { Category, MenuItem } from "@/type"
 import cn from "clsx"
-import React from "react"
+import { useLocalSearchParams } from "expo-router"
+import React, { useMemo } from "react"
 import { FlatList, SafeAreaView, Text, View } from "react-native"
 
 const Search = () => {
-  const data: MenuItem[] = dummyData.menu
+  const searchParams = useLocalSearchParams()
+  const selectedCategory = searchParams.category as string
+
+  const allData: MenuItem[] = dummyData.menu
   const categories: Category[] = dummyData.categories
   const loading = false
+
+  // Filter data based on selected category
+  const filteredData = useMemo(() => {
+    if (!selectedCategory || selectedCategory === "all") {
+      return allData
+    }
+    return allData.filter(item => item.category_name === selectedCategory)
+  }, [selectedCategory, allData])
 
   return (
     <SafeAreaView className="flex-1 bg-white pt-20 px-5">
       <FlatList
-        data={data}
+        data={filteredData}
         renderItem={({ item, index }) => {
           const isFirstRightColItem = index % 2 === 0
 

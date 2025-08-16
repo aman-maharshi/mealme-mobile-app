@@ -1,39 +1,49 @@
 import { Category } from "@/type"
 import cn from "clsx"
 import { router, useLocalSearchParams } from "expo-router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FlatList, Platform, Text, TouchableOpacity } from "react-native"
 
 const Filter = ({ categories }: { categories: Category[] }) => {
   const searchParams = useLocalSearchParams()
-  const [active, setActive] = useState(searchParams.category || "")
+  const [active, setActive] = useState(searchParams.category || "All")
 
-  const handlePress = (id: string) => {
-    setActive(id)
+  // Sync local state with URL params
+  useEffect(() => {
+    if (searchParams.category) {
+      setActive(searchParams.category)
+    } else {
+      setActive("All")
+    }
+  }, [searchParams.category])
 
-    if (id === "all") router.setParams({ category: undefined })
-    else router.setParams({ category: id })
+  const handlePress = (name: string) => {
+    setActive(name)
+    if (name === "All") {
+      router.setParams({ category: undefined })
+      setActive("All")
+    } else {
+      router.setParams({ category: name })
+    }
   }
 
-  const filterData: Array<{ $id: string; name: string }> = categories
-    ? [{ $id: "all", name: "All" }, ...categories.map(cat => ({ $id: (cat as any).$id, name: cat.name }))]
-    : [{ $id: "all", name: "All" }]
+  const filterData = categories ? [{ name: "All" }, ...categories.map(cat => ({ name: cat.name }))] : [{ name: "All" }]
 
   return (
     <FlatList
       data={filterData}
-      keyExtractor={item => item.$id}
+      keyExtractor={item => item.name}
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerClassName="gap-x-2 pb-3"
       renderItem={({ item }) => (
         <TouchableOpacity
-          key={item.$id}
-          className={cn("filter", active === item.$id ? "bg-amber-500" : "bg-white")}
+          key={item.name}
+          className={cn("filter", active === item.name ? "bg-amber-500" : "bg-white")}
           style={Platform.OS === "android" ? { elevation: 5, shadowColor: "#878787" } : {}}
-          onPress={() => handlePress(item.$id)}
+          onPress={() => handlePress(item.name)}
         >
-          <Text className={cn("body-medium", active === item.$id ? "text-white" : "text-gray-200")}>{item.name}</Text>
+          <Text className={cn("body-medium", active === item.name ? "text-white" : "text-gray-200")}>{item.name}</Text>
         </TouchableOpacity>
       )}
     />

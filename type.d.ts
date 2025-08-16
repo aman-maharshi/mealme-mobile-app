@@ -10,6 +10,7 @@ export interface MenuItem extends Models.Document {
   protein: number
   rating: number
   type: string
+  category_name: string
 }
 
 export interface Category extends Models.Document {
