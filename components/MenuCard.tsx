@@ -1,5 +1,6 @@
 import { useCartStore } from "@/store/cartStore"
 import { MenuItem } from "@/type"
+import { router } from "expo-router"
 import { useState } from "react"
 import { ActivityIndicator, Image, Platform, Text, TouchableOpacity, View } from "react-native"
 
@@ -9,10 +10,23 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
   const { addItem, getItemQuantity } = useCartStore()
   const itemQuantity = getItemQuantity(item.$id)
 
+  const handleCardPress = () => {
+    router.push({
+      pathname: "/item",
+      params: { id: item.$id }
+    })
+  }
+
+  const handleAddToCart = (e: any) => {
+    e.stopPropagation()
+    addItem(item)
+  }
+
   return (
     <TouchableOpacity
       className="menu-card"
       style={Platform.OS === "android" ? { elevation: 10, shadowColor: "#878787" } : {}}
+      onPress={handleCardPress}
     >
       <View className="size-32 absolute -top-10 rounded-lg overflow-hidden">
         {imageLoading && (
@@ -46,7 +60,7 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
         {item.name}
       </Text>
       <Text className="body-regular text-gray-200 mb-4">From ${item.price}</Text>
-      <TouchableOpacity onPress={() => addItem(item)}>
+      <TouchableOpacity onPress={handleAddToCart}>
         <Text className="paragraph-bold text-primary">
           {itemQuantity > 0 ? `In Cart (${itemQuantity})` : "Add to Cart +"}
         </Text>

@@ -3,6 +3,7 @@ import CustomHeader from "@/components/CustomHeader"
 import { images } from "@/constants"
 import { useAuthStore } from "@/store/authStore"
 import { Ionicons } from "@expo/vector-icons"
+import { router } from "expo-router"
 import React from "react"
 import { Image, SafeAreaView, Text, View } from "react-native"
 
@@ -23,6 +24,7 @@ const Profile = () => {
 
   const handleSignOut = () => {
     signOut()
+    router.replace("/(auth)/sign-in")
   }
 
   return (
