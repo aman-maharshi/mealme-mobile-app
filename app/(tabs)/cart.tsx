@@ -1,11 +1,13 @@
 import CartItem from "@/components/CartItem"
 import CustomButton from "@/components/CustomButton"
 import CustomHeader from "@/components/CustomHeader"
+import { images } from "@/constants"
 import { useCartStore } from "@/store/cartStore"
 import { PaymentInfoStripeProps } from "@/type"
 import cn from "clsx"
+import { router } from "expo-router"
 import React from "react"
-import { FlatList, SafeAreaView, Text, View } from "react-native"
+import { FlatList, Image, SafeAreaView, Text, View } from "react-native"
 
 const PaymentInfoStripe = ({ label, value, labelStyle, valueStyle }: PaymentInfoStripeProps) => (
   <View className="flex-between flex-row my-1">
@@ -14,10 +16,36 @@ const PaymentInfoStripe = ({ label, value, labelStyle, valueStyle }: PaymentInfo
   </View>
 )
 
+const EmptyCart = () => {
+  const handleStartShopping = () => {
+    router.push("/(tabs)/search")
+  }
+
+  return (
+    <View className="flex-1 items-center justify-center py-16">
+      <View className="h-40 w-40 mb-6">
+        <Image source={images.emptyState} className="h-full w-full" resizeMode="contain" />
+      </View>
+
+      <Text className="text-center text-2xl mb-3 font-quicksand-bold text-dark-100">Your cart is empty</Text>
+
+      <Text className="text-center text-base font-quicksand-medium text-gray-500 mb-8 px-8">
+        Looks like you haven't added any delicious food to your cart yet. Start exploring our menu!
+      </Text>
+
+      <CustomButton title="Start Ordering" onPress={handleStartShopping} />
+    </View>
+  )
+}
+
 const Cart = () => {
   const { items } = useCartStore()
   const totalItems = useCartStore(state => state.getTotalItems())
   const totalPrice = useCartStore(state => state.getTotalPrice())
+
+  const handleStartShopping = () => {
+    router.push("/(tabs)/search")
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-[#fafafa] pt-20 px-5">
@@ -27,7 +55,7 @@ const Cart = () => {
         keyExtractor={item => item.id}
         contentContainerClassName="pb-28 pt-5"
         ListHeaderComponent={() => <CustomHeader title="Your Cart" />}
-        ListEmptyComponent={() => <Text>Cart Empty</Text>}
+        ListEmptyComponent={() => <EmptyCart />}
         ListFooterComponent={() =>
           totalItems > 0 && (
             <View className="gap-5">
