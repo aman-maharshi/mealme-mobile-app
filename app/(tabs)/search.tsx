@@ -2,12 +2,13 @@ import CartButton from "@/components/CartButton"
 import Filter from "@/components/Filter"
 import MenuCard from "@/components/MenuCard"
 import Searchbar from "@/components/SearchBar"
+import { images } from "@/constants"
 import dummyData from "@/constants/data"
 import { Category, MenuItem } from "@/type"
 import cn from "clsx"
 import { useLocalSearchParams } from "expo-router"
 import React, { useMemo } from "react"
-import { FlatList, SafeAreaView, Text, View } from "react-native"
+import { FlatList, Image, SafeAreaView, Text, View } from "react-native"
 
 const Search = () => {
   const searchParams = useLocalSearchParams()
@@ -42,7 +43,7 @@ const Search = () => {
   }, [selectedCategory, searchQuery, allData])
 
   return (
-    <SafeAreaView className="flex-1 bg-white pt-20 px-5">
+    <SafeAreaView className="flex-1 bg-[#fafafa] pt-20 px-5">
       <FlatList
         data={filteredData}
         renderItem={({ item, index }) => {
@@ -79,9 +80,14 @@ const Search = () => {
         )}
         ListEmptyComponent={() =>
           !loading && (
-            <View className="flex-1 items-center justify-center py-10">
-              <Text className="text-gray-500 text-lg">
-                {searchQuery ? `No results found for "${searchQuery}"` : "No items found"}
+            <View className="flex-1 items-center justify-center py-6">
+              <View className="h-40 w-40 mb-4">
+                <Image source={images.emptyState} className="h-full w-full" resizeMode="contain" />
+              </View>
+
+              <Text className="text-center text-xl mb-2 font-quicksand-semibold">Nothing matched your search</Text>
+              <Text className="text-center text-base font-quicksand text-[#878787]">
+                Try a different search term or check for typos.
               </Text>
             </View>
           )

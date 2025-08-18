@@ -34,7 +34,7 @@ export default function Index() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white pt-20 px-5">
+    <SafeAreaView className="flex-1 bg-[#fafafa] pt-20 px-5">
       <FlatList
         data={offers}
         renderItem={({ item, index }) => {

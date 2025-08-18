@@ -1,4 +1,5 @@
 import { images } from "@/constants"
+import { Ionicons } from "@expo/vector-icons"
 import { router, useLocalSearchParams } from "expo-router"
 import React, { useState } from "react"
 import { Image, TextInput, TouchableOpacity, View } from "react-native"
@@ -21,6 +22,11 @@ const Searchbar = () => {
     }
   }
 
+  const handleClear = () => {
+    setQuery("")
+    router.setParams({ query: undefined })
+  }
+
   return (
     <View className="searchbar">
       <TextInput
@@ -32,6 +38,14 @@ const Searchbar = () => {
         placeholderTextColor="#A0A0A0"
         returnKeyType="search"
       />
+
+      {/* Clear button - only show when there's text */}
+      {query && query.trim() && (
+        <TouchableOpacity className="pr-3" onPress={handleClear}>
+          <Ionicons name="close-circle" size={24} color="gray" />
+        </TouchableOpacity>
+      )}
+
       <TouchableOpacity className="pr-5" onPress={handleSubmit}>
         <Image source={images.search} className="size-6" resizeMode="contain" tintColor="#5D5F6D" />
       </TouchableOpacity>
