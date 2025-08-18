@@ -1,10 +1,38 @@
 import CartButton from "@/components/CartButton"
 import { images, offers } from "@/constants"
 import cn from "clsx"
+import { router } from "expo-router"
 import { Fragment } from "react"
 import { FlatList, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 
 export default function Index() {
+  // Map offer titles to category names for navigation
+  const getCategoryFromOffer = (title: string) => {
+    switch (title) {
+      case "BURGER BASH":
+        return "Burgers"
+      case "PIZZA PARTY":
+        return "Pizzas"
+      case "BURRITO DELIGHT":
+        return "Burritos"
+      case "SUMMER COMBO":
+        return "Burgers" // Summer combo is burger-related
+      default:
+        return undefined
+    }
+  }
+
+  const handleOfferPress = (title: string) => {
+    const category = getCategoryFromOffer(title)
+    if (category) {
+      // Navigate to search tab with the selected category
+      router.push({
+        pathname: "/(tabs)/search",
+        params: { category }
+      })
+    }
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-white pt-20 px-5">
       <FlatList
@@ -18,6 +46,7 @@ export default function Index() {
                 className={cn("offer-card", isEven ? "flex-row-reverse" : "flex-row")}
                 style={{ backgroundColor: item.color }}
                 android_ripple={{ color: "#ffffff22" }}
+                onPress={() => handleOfferPress(item.title)}
               >
                 {({ pressed }) => (
                   <Fragment>
