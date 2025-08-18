@@ -12,18 +12,34 @@ import { FlatList, SafeAreaView, Text, View } from "react-native"
 const Search = () => {
   const searchParams = useLocalSearchParams()
   const selectedCategory = searchParams.category as string
+  const searchQuery = searchParams.query as string
 
   const allData: MenuItem[] = dummyData.menu
   const categories: Category[] = dummyData.categories
   const loading = false
 
-  // Filter data based on selected category
+  // Filter data based on selected category and search query
   const filteredData = useMemo(() => {
-    if (!selectedCategory || selectedCategory === "all") {
-      return allData
+    let filtered = allData
+
+    // Filter by category first
+    if (selectedCategory && selectedCategory !== "all") {
+      filtered = filtered.filter(item => item.category_name === selectedCategory)
     }
-    return allData.filter(item => item.category_name === selectedCategory)
-  }, [selectedCategory, allData])
+
+    // Filter by search query
+    if (searchQuery && searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim()
+      filtered = filtered.filter(
+        item =>
+          item.name.toLowerCase().includes(query) ||
+          item.description.toLowerCase().includes(query) ||
+          item.category_name.toLowerCase().includes(query)
+      )
+    }
+
+    return filtered
+  }, [selectedCategory, searchQuery, allData])
 
   return (
     <SafeAreaView className="flex-1 bg-white pt-20 px-5">
@@ -61,7 +77,15 @@ const Search = () => {
             <Filter categories={categories!} />
           </View>
         )}
-        ListEmptyComponent={() => !loading && <Text>No results</Text>}
+        ListEmptyComponent={() =>
+          !loading && (
+            <View className="flex-1 items-center justify-center py-10">
+              <Text className="text-gray-500 text-lg">
+                {searchQuery ? `No results found for "${searchQuery}"` : "No items found"}
+              </Text>
+            </View>
+          )
+        }
       />
     </SafeAreaView>
   )

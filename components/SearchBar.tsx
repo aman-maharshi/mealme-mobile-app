@@ -10,11 +10,15 @@ const Searchbar = () => {
   const handleSearch = (text: string) => {
     setQuery(text)
 
-    if (!text) router.setParams({ query: undefined })
+    if (!text || !text.trim()) {
+      router.setParams({ query: undefined })
+    }
   }
 
   const handleSubmit = () => {
-    if (query.trim()) router.setParams({ query })
+    if (query?.trim()) {
+      router.setParams({ query: query.trim() })
+    }
   }
 
   return (
@@ -28,7 +32,7 @@ const Searchbar = () => {
         placeholderTextColor="#A0A0A0"
         returnKeyType="search"
       />
-      <TouchableOpacity className="pr-5" onPress={() => router.setParams({ query })}>
+      <TouchableOpacity className="pr-5" onPress={handleSubmit}>
         <Image source={images.search} className="size-6" resizeMode="contain" tintColor="#5D5F6D" />
       </TouchableOpacity>
     </View>
