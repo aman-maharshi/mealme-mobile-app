@@ -75,7 +75,7 @@ const ItemDetail = () => {
 
   const handleAddToCart = () => {
     addItem(item, quantity, [...selectedToppings, ...selectedSides])
-    router.back()
+    router.push("/cart")
   }
 
   const itemQuantity = getItemQuantity(item.$id)
