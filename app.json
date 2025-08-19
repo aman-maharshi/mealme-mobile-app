@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "meal-me",
+    "name": "Meal Me",
     "slug": "meal-me",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.amanmaharshi.mealme"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "1e4bb442-e6a1-4d50-99b0-c17da8bce57d"
+      }
     }
   }
 }
