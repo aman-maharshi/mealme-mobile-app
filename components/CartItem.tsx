@@ -2,17 +2,25 @@ import { images } from "@/constants"
 import { useCartStore } from "@/store/cartStore"
 
 import { CartItemType } from "@/type"
+import { router } from "expo-router"
 import { Image, Text, TouchableOpacity, View } from "react-native"
 
 const CartItem = ({ item }: { item: CartItemType }) => {
   const { increaseQty, decreaseQty, removeItem } = useCartStore()
 
+  const handleImagePress = () => {
+    router.push({
+      pathname: "/item",
+      params: { id: item.id }
+    })
+  }
+
   return (
     <View className="cart-item">
       <View className="flex flex-row items-center gap-x-3">
-        <View className="cart-item__image">
+        <TouchableOpacity onPress={handleImagePress} className="cart-item__image">
           <Image source={{ uri: item.image_url }} className="size-4/5 rounded-lg" resizeMode="cover" />
-        </View>
+        </TouchableOpacity>
 
         <View>
           <Text className="base-bold text-dark-100">{item.name}</Text>
