@@ -19,7 +19,7 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
 
   const handleAddToCart = (e: any) => {
     e.stopPropagation()
-    addItem(item)
+    addItem(item, 1, [])
   }
 
   return (

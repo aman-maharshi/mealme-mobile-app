@@ -74,15 +74,7 @@ const ItemDetail = () => {
   }
 
   const handleAddToCart = () => {
-    const cartItem = {
-      id: item.$id,
-      name: item.name,
-      price: item.price,
-      image_url: item.image_url,
-      quantity,
-      customizations: [...selectedToppings, ...selectedSides]
-    }
-    addItem(cartItem as unknown as MenuItem)
+    addItem(item, quantity, [...selectedToppings, ...selectedSides])
     router.back()
   }
 

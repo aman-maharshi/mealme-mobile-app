@@ -1,9 +1,13 @@
-import { CartItemType, MenuItem } from "@/type"
+import { CartCustomization, CartItemType, MenuItem } from "@/type"
 import { create } from "zustand"
 
 interface CartStore {
   items: CartItemType[]
-  addItem: (item: MenuItem) => void
+  addItem: (
+    item: MenuItem | Omit<CartItemType, "quantity">,
+    quantity?: number,
+    customizations?: CartCustomization[]
+  ) => void
   removeItem: (id: string) => void
   increaseQty: (id: string) => void
   decreaseQty: (id: string) => void
@@ -16,26 +20,43 @@ interface CartStore {
 export const useCartStore = create<CartStore>((set, get) => ({
   items: [],
 
-  addItem: (item: MenuItem) => {
+  addItem: (
+    item: MenuItem | Omit<CartItemType, "quantity">,
+    quantity: number = 1,
+    customizations: CartCustomization[] = []
+  ) => {
     const { items } = get()
-    const existingItem = items.find(cartItem => cartItem.id === item.$id)
+
+    // Determine the item ID and basic properties
+    const itemId = "$id" in item ? item.$id : item.id
+    const itemName = item.name
+    const itemPrice = item.price
+    const itemImageUrl = item.image_url
+
+    // Check if item already exists with same customizations
+    const existingItem = items.find(
+      cartItem =>
+        cartItem.id === itemId &&
+        JSON.stringify(cartItem.customizations?.sort((a, b) => a.id.localeCompare(b.id))) ===
+          JSON.stringify(customizations.sort((a, b) => a.id.localeCompare(b.id)))
+    )
 
     if (existingItem) {
-      // If item exists, increase quantity
+      // If item exists with same customizations, increase quantity
       set({
         items: items.map(cartItem =>
-          cartItem.id === item.$id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+          cartItem.id === existingItem.id ? { ...cartItem, quantity: cartItem.quantity + quantity } : cartItem
         )
       })
     } else {
       // If item doesn't exist, add new item
       const newCartItem: CartItemType = {
-        id: item.$id,
-        name: item.name,
-        price: item.price,
-        image_url: item.image_url,
-        quantity: 1,
-        customizations: []
+        id: itemId,
+        name: itemName,
+        price: itemPrice,
+        image_url: itemImageUrl,
+        quantity,
+        customizations
       }
       set({ items: [...items, newCartItem] })
     }
