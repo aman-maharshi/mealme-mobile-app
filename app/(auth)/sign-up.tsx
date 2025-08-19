@@ -33,9 +33,9 @@ const SignUp = () => {
 
       <CustomButton title="Sign Up" isLoading={false} onPress={handleSignUp} />
 
-      <View className="flex justify-center mt-5 flex-row gap-2">
-        <Text className="base-regular text-gray-100">Already have an account?</Text>
-        <Link href="/sign-in" className="base-bold text-primary">
+      <View className="flex justify-center flex-row gap-2">
+        <Text className="font-quicksand text-gray-100">Already have an account?</Text>
+        <Link href="/sign-in" className="font-quicksand-semibold text-primary">
           Sign In
         </Link>
       </View>

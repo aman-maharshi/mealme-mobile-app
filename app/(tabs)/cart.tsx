@@ -48,7 +48,7 @@ const Cart = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-[#fafafa] pt-20 px-5">
+    <SafeAreaView className="flex-1 bg-[#fafafa] pt-20 pb-16 px-5">
       <FlatList
         data={items}
         renderItem={({ item }) => <CartItem item={item} />}
