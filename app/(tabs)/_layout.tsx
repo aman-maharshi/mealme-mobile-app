@@ -1,5 +1,6 @@
 import { images } from "@/constants"
 import { useAuthStore } from "@/store/authStore"
+import { useCartStore } from "@/store/cartStore"
 import { TabBarIconProps } from "@/type"
 import cn from "clsx"
 import { Redirect, Tabs } from "expo-router"
@@ -12,6 +13,30 @@ const TabBarIcon = ({ focused, icon, title }: TabBarIconProps) => (
     <Text className={cn("text-sm font-bold", focused ? "text-primary" : "text-gray-200")}>{title}</Text>
   </View>
 )
+
+const CartTabIcon = ({ focused }: { focused: boolean }) => {
+  const { getTotalItems } = useCartStore()
+  const totalItems = getTotalItems()
+
+  return (
+    <View className="tab-icon">
+      <View className="relative">
+        <Image
+          source={images.bag}
+          className="size-7"
+          resizeMode="contain"
+          tintColor={focused ? "#FE8C00" : "#5D5F6D"}
+        />
+        {totalItems > 0 && (
+          <View className="absolute -top-2 -right-2 bg-primary rounded-full w-5 h-5 items-center justify-center">
+            <Text className="text-xs font-bold text-white">{totalItems}</Text>
+          </View>
+        )}
+      </View>
+      <Text className={cn("text-sm font-bold", focused ? "text-primary" : "text-gray-200")}>Cart</Text>
+    </View>
+  )
+}
 
 const RootLayout = () => {
   const { isAuthenticated } = useAuthStore()
@@ -61,7 +86,7 @@ const RootLayout = () => {
         name="cart"
         options={{
           title: "Cart",
-          tabBarIcon: ({ focused }) => <TabBarIcon title="Cart" icon={images.bag} focused={focused} />
+          tabBarIcon: ({ focused }) => <CartTabIcon focused={focused} />
         }}
       />
       <Tabs.Screen
