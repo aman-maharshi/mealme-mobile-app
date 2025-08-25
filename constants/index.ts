@@ -21,7 +21,7 @@ import arrowBack from "../assets/icons/arrow-back.png"
 
 import avatar from "@/assets/images/avatar.jpeg"
 import avocado from "@/assets/images/avocado.png"
-import bacon from "@/assets/images/bacon.png"
+
 import burgerOne from "@/assets/images/burger-one.png"
 import burgerTwo from "@/assets/images/burger-two.png"
 import buritto from "@/assets/images/buritto.png"
@@ -130,11 +130,7 @@ export const toppings = [
     image: avocado,
     price: 1.5
   },
-  {
-    name: "Bacon",
-    image: bacon,
-    price: 2.0
-  },
+
   {
     name: "Cheese",
     image: cheese,
@@ -165,7 +161,7 @@ export const toppings = [
 export const images = {
   avatar,
   avocado,
-  bacon,
+
   burgerOne,
   burgerTwo,
   buritto,

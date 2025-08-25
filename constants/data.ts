@@ -16,7 +16,7 @@ const dummyData = {
     { name: "Olives", price: 15, type: "topping" },
     { name: "Mushrooms", price: 18, type: "topping" },
     { name: "Tomatoes", price: 10, type: "topping" },
-    { name: "Bacon", price: 30, type: "topping" },
+
     { name: "Avocado", price: 35, type: "topping" },
 
     // Sides
@@ -45,7 +45,7 @@ const dummyData = {
       calories: 550,
       protein: 25,
       category_name: "Burgers",
-      customizations: ["Extra Cheese", "Coke", "Fries", "Onions", "Bacon"]
+      customizations: ["Extra Cheese", "Coke", "Fries", "Onions"]
     },
     {
       $id: "2",
@@ -87,7 +87,7 @@ const dummyData = {
       calories: 650,
       protein: 29,
       category_name: "Burgers",
-      customizations: ["Onions", "Fries", "Coke", "Bacon", "Avocado"]
+      customizations: ["Onions", "Fries", "Coke", "Avocado"]
     },
     {
       $id: "5",
@@ -227,7 +227,7 @@ const dummyData = {
       calories: 610,
       protein: 31,
       category_name: "Sandwiches",
-      customizations: ["Bacon", "Tomatoes", "Mozzarella Sticks", "Iced Tea"]
+      customizations: ["Tomatoes", "Mozzarella Sticks", "Iced Tea"]
     }
   ]
 }
