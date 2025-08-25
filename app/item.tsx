@@ -108,7 +108,11 @@ const ItemDetail = () => {
 
             {/* Product Image */}
             <View className="w-32 h-32 rounded-2xl overflow-hidden">
-              <Image source={{ uri: item.image_url }} className="w-full h-full" resizeMode="cover" />
+              {item.image ? (
+                <Image source={item.image} className="w-full h-full" resizeMode="cover" />
+              ) : (
+                <Image source={{ uri: item.image_url }} className="w-full h-full" resizeMode="cover" />
+              )}
             </View>
           </View>
 

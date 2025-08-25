@@ -1,3 +1,4 @@
+import { images } from "@/constants"
 const dummyData = {
   categories: [
     { $id: "1", name: "Burgers", description: "Juicy grilled burgers" },
@@ -228,6 +229,19 @@ const dummyData = {
       protein: 31,
       category_name: "Sandwiches",
       customizations: ["Tomatoes", "Mozzarella Sticks", "Iced Tea"]
+    },
+    {
+      $id: "15",
+      type: "menu_item",
+      name: "Veggie Supreme Pizza",
+      description: "Loaded with bell peppers, onions, mushrooms, tomatoes, olives",
+      image: images.veggieSupreme,
+      price: 26.99,
+      rating: 4.1,
+      calories: 590,
+      protein: 21,
+      category_name: "Pizzas",
+      customizations: ["Extra Cheese", "Olives", "Coke", "Garlic Bread"]
     }
   ]
 }

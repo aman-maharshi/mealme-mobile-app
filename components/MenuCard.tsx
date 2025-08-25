@@ -42,18 +42,33 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
           </View>
         )}
 
-        <Image
-          source={{ uri: item.image_url }}
-          className="size-32 absolute inset-0"
-          resizeMode="contain"
-          onLoadStart={() => setImageLoading(true)}
-          onLoad={() => setImageLoading(false)}
-          onError={() => {
-            setImageLoading(false)
-            setImageError(true)
-          }}
-          style={{ opacity: imageLoading || imageError ? 0 : 1 }}
-        />
+        {item.image ? (
+          <Image
+            source={item.image}
+            className="size-32 absolute inset-0"
+            resizeMode="contain"
+            onLoadStart={() => setImageLoading(true)}
+            onLoad={() => setImageLoading(false)}
+            onError={() => {
+              setImageLoading(false)
+              setImageError(true)
+            }}
+            style={{ opacity: imageLoading || imageError ? 0 : 1 }}
+          />
+        ) : (
+          <Image
+            source={{ uri: item.image_url }}
+            className="size-32 absolute inset-0"
+            resizeMode="contain"
+            onLoadStart={() => setImageLoading(true)}
+            onLoad={() => setImageLoading(false)}
+            onError={() => {
+              setImageLoading(false)
+              setImageError(true)
+            }}
+            style={{ opacity: imageLoading || imageError ? 0 : 1 }}
+          />
+        )}
       </View>
 
       <Text className="text-center base-bold text-dark-100 mb-2" numberOfLines={1}>

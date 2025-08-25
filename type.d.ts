@@ -11,6 +11,7 @@ export interface MenuItem extends Models.Document {
   rating: number
   type: string
   category_name: string
+  image?: ImageSourcePropType
 }
 
 export interface Category extends Models.Document {
