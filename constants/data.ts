@@ -6,7 +6,8 @@ const dummyData = {
     { $id: "3", name: "Burritos", description: "Rolled Mexican delights" },
     { $id: "4", name: "Sandwiches", description: "Stacked and stuffed sandwiches" },
     { $id: "5", name: "Wraps", description: "Rolled up wraps packed with flavor" },
-    { $id: "6", name: "Bowls", description: "Balanced rice and protein bowls" }
+    { $id: "6", name: "Bowls", description: "Balanced rice and protein bowls" },
+    { $id: "7", name: "Indian", description: "Indian cuisine" }
   ],
 
   customizations: [
@@ -242,6 +243,48 @@ const dummyData = {
       protein: 21,
       category_name: "Pizzas",
       customizations: ["Extra Cheese", "Olives", "Coke", "Garlic Bread"]
+    },
+    {
+      $id: "16",
+      type: "menu_item",
+      name: "Masala Dosa",
+      description: "A crispy, thin, and savory dosa filled with spiced potatoes and served with chutney and sambar",
+      image: images.dosa,
+      price: 19.99,
+      rating: 4.5,
+      calories: 320,
+      protein: 12,
+      category_name: "Indian",
+      hideToppings: true,
+      hideSides: true
+    },
+    {
+      $id: "17",
+      type: "menu_item",
+      name: "Fried Rice",
+      description: "Indian fried rice with vegetables and spices",
+      image: images.friedRice,
+      price: 19.99,
+      rating: 4.5,
+      calories: 320,
+      protein: 12,
+      category_name: "Indian",
+      hideToppings: true,
+      hideSides: true
+    },
+    {
+      $id: "18",
+      type: "menu_item",
+      name: "Thali",
+      description: "A traditional Indian meal consisting of various dishes served on a large plate",
+      image: images.indian,
+      price: 19.99,
+      rating: 4.5,
+      calories: 320,
+      protein: 12,
+      category_name: "Indian",
+      hideToppings: true,
+      hideSides: true
     }
   ]
 }

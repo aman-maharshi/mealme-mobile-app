@@ -17,6 +17,8 @@ export default function Index() {
         return "Burritos"
       case "SUMMER COMBO":
         return "Burgers" // Summer combo is burger-related
+      case "INDIAN DELIGHT":
+        return "Indian"
       default:
         return undefined
     }

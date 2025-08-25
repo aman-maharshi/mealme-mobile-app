@@ -151,68 +151,73 @@ const ItemDetail = () => {
         </View>
 
         {/* Toppings Section */}
-        <View className="bg-white rounded-2xl p-6 mb-6 shadow-sm shadow-black/5">
-          <Text className="h3-bold text-dark-100 mb-4">Toppings</Text>
-          <FlatList
-            data={toppings}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item: topping }) => {
-              const isSelected = selectedToppings.some(t => t.id === topping.name)
-              return (
-                <TouchableOpacity
-                  className={`mr-4 items-center ${isSelected ? "opacity-100" : "opacity-100"}`}
-                  onPress={() => handleToppingToggle(topping)}
-                >
-                  <View
-                    className={`w-20 h-20 rounded-2xl overflow-hidden mb-2 ${isSelected ? "border-2 border-primary" : ""}`}
+
+        {!item.hideToppings && (
+          <View className="bg-white rounded-2xl p-6 mb-6 shadow-sm shadow-black/5">
+            <Text className="h3-bold text-dark-100 mb-4">Toppings</Text>
+            <FlatList
+              data={toppings}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item: topping }) => {
+                const isSelected = selectedToppings.some(t => t.id === topping.name)
+                return (
+                  <TouchableOpacity
+                    className={`mr-4 items-center ${isSelected ? "opacity-100" : "opacity-100"}`}
+                    onPress={() => handleToppingToggle(topping)}
                   >
-                    <Image source={topping.image} className="w-full h-full" resizeMode="cover" />
-                  </View>
-                  <Text className="paragraph-medium text-dark-100 text-center mb-1">{topping.name}</Text>
-                  <View
-                    className={`w-6 h-6 rounded-full items-center justify-center ${isSelected ? "bg-primary" : "bg-gray-300"}`}
-                  >
-                    <Ionicons name={isSelected ? "checkmark" : "add"} size={16} color="white" />
-                  </View>
-                </TouchableOpacity>
-              )
-            }}
-            keyExtractor={item => item.name}
-          />
-        </View>
+                    <View
+                      className={`w-20 h-20 rounded-2xl overflow-hidden mb-2 ${isSelected ? "border-2 border-primary" : ""}`}
+                    >
+                      <Image source={topping.image} className="w-full h-full" resizeMode="cover" />
+                    </View>
+                    <Text className="paragraph-medium text-dark-100 text-center mb-1">{topping.name}</Text>
+                    <View
+                      className={`w-6 h-6 rounded-full items-center justify-center ${isSelected ? "bg-primary" : "bg-gray-300"}`}
+                    >
+                      <Ionicons name={isSelected ? "checkmark" : "add"} size={16} color="white" />
+                    </View>
+                  </TouchableOpacity>
+                )
+              }}
+              keyExtractor={item => item.name}
+            />
+          </View>
+        )}
 
         {/* Side Options Section */}
-        <View className="bg-white rounded-2xl p-6 mb-6 shadow-sm shadow-black/5">
-          <Text className="h3-bold text-dark-100 mb-4">Side Options</Text>
-          <FlatList
-            data={sides}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item: side }) => {
-              const isSelected = selectedSides.some(s => s.id === side.name)
-              return (
-                <TouchableOpacity
-                  className={`mr-4 items-center ${isSelected ? "opacity-100" : "opacity-100"}`}
-                  onPress={() => handleSideToggle(side)}
-                >
-                  <View
-                    className={`w-20 h-20 rounded-2xl overflow-hidden mb-2 ${isSelected ? "border-2 border-primary" : ""}`}
+        {!item.hideSides && (
+          <View className="bg-white rounded-2xl p-6 mb-6 shadow-sm shadow-black/5">
+            <Text className="h3-bold text-dark-100 mb-4">Side Options</Text>
+            <FlatList
+              data={sides}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item: side }) => {
+                const isSelected = selectedSides.some(s => s.id === side.name)
+                return (
+                  <TouchableOpacity
+                    className={`mr-4 items-center ${isSelected ? "opacity-100" : "opacity-100"}`}
+                    onPress={() => handleSideToggle(side)}
                   >
-                    <Image source={side.image} className="w-full h-full" resizeMode="cover" />
-                  </View>
-                  <Text className="paragraph-medium text-dark-100 text-center mb-1">{side.name}</Text>
-                  <View
-                    className={`w-6 h-6 rounded-full items-center justify-center ${isSelected ? "bg-primary" : "bg-gray-300"}`}
-                  >
-                    <Ionicons name={isSelected ? "checkmark" : "add"} size={16} color="white" />
-                  </View>
-                </TouchableOpacity>
-              )
-            }}
-            keyExtractor={item => item.name}
-          />
-        </View>
+                    <View
+                      className={`w-20 h-20 rounded-2xl overflow-hidden mb-2 ${isSelected ? "border-2 border-primary" : ""}`}
+                    >
+                      <Image source={side.image} className="w-full h-full" resizeMode="cover" />
+                    </View>
+                    <Text className="paragraph-medium text-dark-100 text-center mb-1">{side.name}</Text>
+                    <View
+                      className={`w-6 h-6 rounded-full items-center justify-center ${isSelected ? "bg-primary" : "bg-gray-300"}`}
+                    >
+                      <Ionicons name={isSelected ? "checkmark" : "add"} size={16} color="white" />
+                    </View>
+                  </TouchableOpacity>
+                )
+              }}
+              keyExtractor={item => item.name}
+            />
+          </View>
+        )}
 
         {/* Bottom Bar - Quantity and Add to Cart */}
         <View className="bg-white rounded-2xl p-6 mb-6 shadow-sm shadow-black/5">

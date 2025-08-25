@@ -12,6 +12,8 @@ export interface MenuItem extends Models.Document {
   type: string
   category_name: string
   image?: ImageSourcePropType
+  hideToppings?: boolean
+  hideSides?: boolean
 }
 
 export interface Category extends Models.Document {
@@ -37,6 +39,7 @@ export interface CartItemType {
   name: string
   price: number
   image_url: string
+  image?: any // Local image asset
   quantity: number
   customizations?: CartCustomization[]
 }

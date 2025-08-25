@@ -28,8 +28,11 @@ import buritto from "@/assets/images/buritto.png"
 import cheese from "@/assets/images/cheese.png"
 import coleslaw from "@/assets/images/coleslaw.png"
 import cucumber from "@/assets/images/cucumber.png"
+import dosa from "@/assets/images/dosa.png"
 import emptyState from "@/assets/images/empty-state.png"
+import friedRice from "@/assets/images/fried-rice.png"
 import fries from "@/assets/images/fries.png"
+import indian from "@/assets/images/indian.png"
 import loginGraphic from "@/assets/images/login-graphic.png"
 import logo from "@/assets/images/logo.png"
 import mozarellaSticks from "@/assets/images/mozarella-sticks.png"
@@ -94,6 +97,12 @@ export const offers = [
     title: "SUMMER COMBO",
     image: burgerOne,
     color: "#D33B0D"
+  },
+  {
+    id: 5,
+    title: "INDIAN DELIGHT",
+    image: dosa,
+    color: "#084137"
   }
 ]
 
@@ -200,5 +209,8 @@ export const images = {
   search,
   star,
   trash,
-  user
+  user,
+  dosa,
+  friedRice,
+  indian
 }

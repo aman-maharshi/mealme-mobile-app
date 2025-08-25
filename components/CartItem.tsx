@@ -19,7 +19,11 @@ const CartItem = ({ item }: { item: CartItemType }) => {
     <View className="cart-item">
       <View className="flex flex-row items-center gap-x-3">
         <TouchableOpacity onPress={handleImagePress} className="cart-item__image">
-          <Image source={{ uri: item.image_url }} className="size-4/5 rounded-lg" resizeMode="cover" />
+          {item.image ? (
+            <Image source={item.image} className="size-4/5 rounded-lg" resizeMode="cover" />
+          ) : (
+            <Image source={{ uri: item.image_url }} className="size-4/5 rounded-lg" resizeMode="cover" />
+          )}
         </TouchableOpacity>
 
         <View>
